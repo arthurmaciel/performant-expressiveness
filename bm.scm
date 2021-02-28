@@ -14,10 +14,19 @@
    make_double(res, ((double)(now.tv_sec) + (double)(now.tv_nsec/1.0e9)));
    return_closcall1(data, k, &res);")
 
-;; (define (fib n)
-;;   (if (< n 2)
-;;       n
-;;       (+ (fib (- n 1)) (fib (- n 2)))))
+(define-syntax time
+  (syntax-rules ()
+    ((time proc)
+     (let* ((t1 (clock-now))
+            (proc)
+            (t2 (- (clock-now) t1)))
+       (printf "%.9f\n" t2)
+       t2))))
+
+(define (fib n)
+  (if (< n 2)
+      n
+      (+ (fib (- n 1)) (fib (- n 2)))))
 
 (define (fib n)
   (do ((n n (- n 1))

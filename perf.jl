@@ -1,11 +1,12 @@
 # This file was formerly a part of Julia. License is MIT: https://julialang.org/license
 # https://github.com/JuliaLang/Microbenchmarks/blob/master/perf.jl
 
-using Base
+# using Base
 using Printf
 using Random
 using BenchmarkTools
-import Compat.LinearAlgebra
+
+import LinearAlgebra
 
 macro print_elapsed(f, name, desc)
     name = esc(name)
