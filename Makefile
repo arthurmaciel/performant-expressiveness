@@ -38,6 +38,6 @@ pypy-config:
 	pypy3 -m pip install numpy
 
 clean:
-	rm -f perf-c perf-cyclone perf-cyclone.{c,o} cyclone/printf.{meta,o,so,c} perf-gambit
+	rm -f perf-c perf-cyclone perf-cyclone.c perf-cyclone.o cyclone/printf.meta cyclone/printf.o cyclone/printf.so cyclone/printf.c perf-gambit
 
 .PHONY: all pre-run perf-c perf-cyclone perf-gambit perf-julia perf-python perf-pypython cpython-config pypy-config clean
