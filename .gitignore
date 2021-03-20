@@ -2,6 +2,11 @@ Microbenchmarks
 bench.ods
 bench.csv*
 .~lock.*
+perf-c
+perf-cyclone
+perf-cyclone.c
+perf-cyclone.o
+perf-gambit
 cyclone/printf.c
 cyclone/printf.o
 cyclone/printf.so
