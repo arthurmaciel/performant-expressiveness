@@ -29,19 +29,19 @@ tr_fib(n) = helper(Int(0), Int(1), n)
 @print_elapsed tr_fib(20) "tail_recursive_fibonacci" "Recursive fibonacci"
 
 
-## parse integer ##
-# function parseintperf(t)
-#     local n, m
-#     for i=1:t
-#         n = rand(UInt32)
-#         s = string(n, base = 16)
-#         m = UInt32(parse(Int64, s, base = 16))
-#         @assert m == n
-#     end
-#     return n
-# end
+parse integer ##
+function parseintperf(t)
+    local n, m
+    for i=1:t
+        n = rand(UInt32)
+        s = string(n, base = 16)
+        m = UInt32(parse(Int64, s, base = 16))
+        @assert m == n
+    end
+    return n
+end
 
-# @print_elapsed parseintperf(1000) "parse_integers" "Integer parsing"
+@print_elapsed parseintperf(1000) "parse_integers" "Integer parsing"
 
 
 ## mandelbrot set: complex arithmetic and comprehensions ##

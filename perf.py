@@ -116,13 +116,13 @@ if __name__=="__main__":
         if t < tmin: tmin = t
     print_perf("recursion_fibonacci", tmin)
 
-    # tmin = float('inf')
-    # for i in range(mintrials):
-    #     t = time.time()
-    #     n = parse_int(1000)
-    #     t = time.time()-t
-    #     if t < tmin: tmin = t
-    # print_perf ("parse_integers", tmin)
+    tmin = float('inf')
+    for i in range(mintrials):
+        t = time.time()
+        n = parse_int(1000)
+        t = time.time()-t
+        if t < tmin: tmin = t
+    print_perf ("parse_integers", tmin)
 
     # assert sum(mandelperf()) == 14791
     # tmin = float('inf')

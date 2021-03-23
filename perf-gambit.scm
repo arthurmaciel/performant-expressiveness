@@ -153,14 +153,6 @@ c-lambda-end
 
 (print-perf "iteration_pi_sum" (elapsed (pisum)))
 
-;; (define (printfd n)
-;;   (with-output-to-file "/dev/null"
-;;     (lambda ()
-;;       (for i in (iota n 1)
-;;            (display i)
-;;            (display (+ i 1))
-;;            (newline)))))
-
 (define (printfd n)
   (with-output-to-file "/dev/null"
     (lambda ()
@@ -174,6 +166,15 @@ c-lambda-end
 
 (print-perf "print_to_file" (elapsed (printfd 100000)))
 
+(define (parse-int t)
+  (for i in (iota t 1)
+       (let* ((n (random-integer))
+              (s (number->string n 16))
+              (m (string->number s 16)))
+         (unless (= n m) (error "Incorrect parsing of integers!"))
+         n)))
+
+(print-perf "parse_integers" (elapsed (parse-int 1000)))
 
 
 

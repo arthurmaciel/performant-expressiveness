@@ -25,7 +25,7 @@ int iterative_fib(int n) {
   return sum;
 }
 
-double *myrand(int n) {
+double *rand_double_array(int n) {
   double *d = (double *)malloc(n*sizeof(double));
   for(int i = 0; i <n; i++) {
     d[i] = rand()%1;
@@ -83,6 +83,22 @@ void printfd(int n) {
   fclose(f);
 }
 
+long parse_int(const char *s, long base) {
+  long n = 0;
+  for (; *s; ++s) {
+    char c = *s;
+    long d = 0;
+    if (c >= '0' && c <= '9') d = c-'0';
+    else if (c >= 'A' && c <= 'Z') d = c-'A' + (int) 10;
+    else if (c >= 'a' && c <= 'z') d = c-'a' + (int) 10;
+    else exit(-1);
+
+    if (base <= d) exit(-1);
+    n = n*base + d;
+  }
+  return n;
+}
+
 void print_perf(char *test, double time) {
   printf("%s,%s,%.9f\n", "C", test, time);
 }
@@ -90,31 +106,66 @@ void print_perf(char *test, double time) {
 int main(int argc, char **argv) { 
   double t;
 
-  t = clock_now();
-  fib(30);
-  t = clock_now()-t;
+  tmin = INFINITY;
+  for (int i=0; i<NITER; ++i) {
+    t = clock_now();
+    fib(30);
+    t = clock_now()-t;
+    if (t < tmin) tmin = t;
+  }
   print_perf("recursion_fibonacci", t);
 
-  t = clock_now();
-  iterative_fib(30);
-  t = clock_now()-t;
+  tmin = INFINITY;
+  for (int i=0; i<NITER; ++i) {
+    t = clock_now();
+    iterative_fib(30);
+    t = clock_now()-t;
+    if (t < tmin) tmin = t;
+  }
   print_perf("iteration_fibonacci", t);
 
-  t = clock_now();
-  pisum();
-  t = clock_now()-t;
+  tmin = INFINITY;
+  for (int i=0; i<NITER; ++i) {
+    t = clock_now();
+    pisum();
+    t = clock_now()-t;
+    if (t < tmin) tmin = t;
+  }
   print_perf("iteration_pi_sum", t);
 
-  t = clock_now();
-  printfd(100000);
-  t = clock_now()-t;
+  tmin = INFINITY;
+  for (int i=0; i<NITER; ++i) {
+    t = clock_now();
+    printfd(100000);
+    t = clock_now()-t;
+    if (t < tmin) tmin = t;
+  }
   print_perf("print_to_file", t);
 
-  double *d = myrand(5000);
-  t = clock_now();
-  quicksort(d, 0, 5000-1);
-  t = clock_now()-t;
+  tmin = INFINITY;
+  for (int i=0; i<NITER; ++i) {
+    double *d = rand_double_array(5000);
+    t = clock_now();
+    quicksort(d, 0, 5000-1);
+    t = clock_now()-t;
+    if (t < tmin) tmin = t;
+  }
   print_perf("imperative_recursion_quicksort", t);
+
+  tmin = INFINITY;
+  for (int i=0; i<NITER; ++i) {
+    t = clock_now();
+    char s[11];
+    for (int k=0; k<1000; ++k) {
+      uint32_t n = rand();
+      sprintf(s, "%x", n);
+      uint32_t m = (uint32_t)parse_int(s, 16);
+      assert(m == n);
+    }
+    t = clock_now()-t;
+    if (t < tmin) tmin = t;
+  }
+  print_perf("parse_integers", t);
   
   return 0;
 }

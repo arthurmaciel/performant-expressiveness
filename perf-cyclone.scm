@@ -3,6 +3,7 @@
         (scheme file)
         (cyclone benchmark)
         (cyclone foreign)
+        (only (cyclone test) test-assert)
         (cyclone printf)
         (srfi 1)
         (srfi 27)) ;; random numbers
@@ -112,14 +113,6 @@
 
 (print-perf "iteration_pi_sum" (elapsed (pisum)))
 
-;; (define (printfd n)
-;;   (with-output-to-file "/dev/null"
-;;     (lambda ()
-;;       (for i in (iota n 1)
-;;            (display i)
-;;            (display (+ i 1))
-;;            (newline)))))
-
 (define (printfd n)
   (with-output-to-file "/dev/null"
     (lambda ()
@@ -133,6 +126,12 @@
 
 (print-perf "print_to_file" (elapsed (printfd 100000)))
 
+(define (parse-int t)
+  (for i in (iota t 1)
+       (let* ((n (random))
+              (s (number->string n 16))
+              (m (string->number s 16)))
+         (test-assert (= n m))
+         n)))
 
-
-
+(print-perf "parse_integers" (elapsed (parse-int 1000)))
