@@ -1,6 +1,6 @@
 Microbenchmarks
 bench.ods
-bench.csv*
+bench.csv-*
 .~lock.*
 perf-c
 perf-cyclone
