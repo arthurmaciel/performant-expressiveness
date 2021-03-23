@@ -3,7 +3,6 @@
         (scheme file)
         (cyclone benchmark)
         (cyclone foreign)
-        (only (cyclone test) test-assert)
         (cyclone printf)
         (srfi 1)
         (srfi 27)) ;; random numbers
@@ -128,10 +127,10 @@
 
 (define (parse-int t)
   (for i in (iota t 1)
-       (let* ((n (random))
+       (let* ((n (random-integer (- (expt 2 32) 1)))
               (s (number->string n 16))
               (m (string->number s 16)))
-         (test-assert (= n m))
+         (unless (= n m) (error "Incorrect parsing of integers!"))
          n)))
 
 (print-perf "parse_integers" (elapsed (parse-int 1000)))

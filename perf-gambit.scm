@@ -168,7 +168,7 @@ c-lambda-end
 
 (define (parse-int t)
   (for i in (iota t 1)
-       (let* ((n (random-integer))
+       (let* ((n (random-integer (- (expt 2 32) 1)))
               (s (number->string n 16))
               (m (string->number s 16)))
          (unless (= n m) (error "Incorrect parsing of integers!"))

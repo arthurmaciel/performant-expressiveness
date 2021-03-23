@@ -1,7 +1,10 @@
-#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <assert.h>
 
+#define NITER 5
 double clock_now()
 {
   struct timespec now;
@@ -104,7 +107,7 @@ void print_perf(char *test, double time) {
 }
 
 int main(int argc, char **argv) { 
-  double t;
+  double t, tmin;
 
   tmin = INFINITY;
   for (int i=0; i<NITER; ++i) {
@@ -157,9 +160,9 @@ int main(int argc, char **argv) {
     t = clock_now();
     char s[11];
     for (int k=0; k<1000; ++k) {
-      uint32_t n = rand();
+      u_int32_t n = rand();
       sprintf(s, "%x", n);
-      uint32_t m = (uint32_t)parse_int(s, 16);
+      u_int32_t m = (u_int32_t)parse_int(s, 16);
       assert(m == n);
     }
     t = clock_now()-t;
