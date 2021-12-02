@@ -38,4 +38,4 @@ int fib(int n) {
 
 ![Graph](/benchmarks.png) 
 
-The graph was generated in a Intel i5 4GB RAM Linux thunder 5.4.0-64-generic #72-Ubuntu SMP Fri Jan 15 10:27:54 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux. For raw data in seconds see [bench.csv](https://github.com/arthurmaciel/performant-expressiveness/blob/master/bench.csv).
+The graph was generated in a Intel i5 4GB RAM Linux 5.4.0-89-generic #100-Ubuntu SMP Fri Sep 24 14:50:10 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux. For raw data in seconds see [bench.csv](https://github.com/arthurmaciel/performant-expressiveness/blob/master/bench.csv).
