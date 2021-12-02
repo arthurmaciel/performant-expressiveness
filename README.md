@@ -8,15 +8,15 @@ On the other side, the aim of the PE benchmarks is to compare languages emphasiz
 Currently the chosen languages match the author's preferences. The idea is to expand these microbenchmarks to encompass relevant and beautiful algorithms in different languages.
 
 We assume as good criteria to consider some code as "expressive":
-- fewer numbers of lines of code;
+- fewer lines of code;
 - faster inteligibility (e.g. new programmers can _understand_ the meaning, execution and result of a piece of code with less thinking time).
 
-Of course these are terms subject to controversy. The idea is not to estimulate definition wars (and no other type of flame war) wars. The benchmarks are meant to aggregate beautiful and performant code.
+Of course these are terms subject to controversy. The idea is not to estimulate definition wars (and no other type of flame war). The benchmarks are meant to aggregate beautiful and performant code.
 
 Contributions are very welcomed!
 
 ---------- 
-For a quick reference on performance, note how a _recursive_ algorithm to compute the first 20 Fibonacci numbers runs in two Scheme implementations (Cyclone and Gambit)...
+For a quick reference on performance, note how a _recursive_ algorithm to compute the first 20 Fibonacci numbers runs in two Scheme implementations (Chez, Cyclone and Gambit)...
 
 ```Scheme 
 (define (fib n)
