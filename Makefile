@@ -1,6 +1,6 @@
 BENCH_CSV = bench.csv
 
-all: pre-run perf-c perf-cyclone perf-gambit perf-julia perf-python perf-pypython
+all: pre-run perf-c perf-cyclone perf-chez perf-gambit perf-julia perf-python perf-pypython
 
 pre-run:
 ifneq ("$(wildcard $(BENCH_CSV))","")
@@ -15,6 +15,11 @@ perf-cyclone:
 	cyclone cyclone/printf.sld
 	cyclone perf-cyclone.scm
 	./perf-cyclone >> $(BENCH_CSV)
+
+perf-chez:
+	cc -fPIC -shared -o libforchez.so libforchez.c
+	echo '(compile-file "perf-chez.ss")' | scheme -q
+	scheme --script perf-chez.so >> $(BENCH_CSV)
 
 perf-gambit:
 	gsc -o perf-gambit -exe perf-gambit.scm
@@ -38,6 +43,6 @@ pypy-config:
 	pypy3 -m pip install numpy
 
 clean:
-	rm -f perf-c perf-cyclone perf-cyclone.c perf-cyclone.o cyclone/printf.meta cyclone/printf.o cyclone/printf.so cyclone/printf.c perf-gambit
+	rm -f perf-c perf-cyclone perf-cyclone.c perf-cyclone.o cyclone/printf.meta cyclone/printf.o cyclone/printf.so cyclone/printf.c perf-chez.so libforchez.so perf-gambit
 
-.PHONY: all pre-run perf-c perf-cyclone perf-gambit perf-julia perf-python perf-pypython cpython-config pypy-config clean
+.PHONY: all pre-run perf-c perf-cyclone perf-chez perf-gambit perf-julia perf-python perf-pypython cpython-config pypy-config clean
